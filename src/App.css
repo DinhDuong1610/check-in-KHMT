@@ -1,0 +1,91 @@
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  background-color: #282c34;
+  color: white;
+  text-align: center;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.App-header {
+  padding: 20px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+h1 {
+  font-size: calc(10px + 2vmin);
+  margin-bottom: 20px;
+}
+
+/* Đây là phần quan trọng cho QR Scanner */
+#qr-reader {
+  width: 500px;
+  max-width: 90vw;
+  background: white;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 4px solid #61dafb;
+}
+
+/* Nút "Start Scanning" (nếu có) */
+#qr-reader button {
+  background-color: #61dafb;
+  color: #282c34;
+  border: none;
+  padding: 10px 15px;
+  font-size: 16px;
+  cursor: pointer;
+  width: 100%;
+}
+
+.result-container {
+  margin-top: 20px;
+  font-size: 1.2rem;
+  min-height: 100px;
+  /* Dành không gian cho thông báo */
+}
+
+.loading-spinner {
+  font-size: 1.5rem;
+  color: #61dafb;
+}
+
+/* CSS cho thông báo */
+.response-message {
+  padding: 15px;
+  border-radius: 8px;
+  font-weight: bold;
+  opacity: 1;
+  transition: opacity 0.5s ease-out;
+}
+
+.response-message.hidden {
+  opacity: 0;
+}
+
+.response-message.success {
+  background-color: #4CAF50;
+  /* Xanh lá */
+  color: white;
+}
+
+.response-message.warning {
+  background-color: #ffeb3b;
+  /* Vàng */
+  color: #282c34;
+}
+
+.response-message.error {
+  background-color: #f44336;
+  /* Đỏ */
+  color: white;
+}
