@@ -37,7 +37,7 @@ function App() {
     }
   };
 
-  const onScanFailure = (error: string) => {
+  const onScanFailure = () => {
   };
 
   useEffect(() => {
