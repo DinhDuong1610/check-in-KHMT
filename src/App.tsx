@@ -26,13 +26,13 @@ function App() {
         .then((data: ApiResponse) => {
           setApiResponse(data);
           setIsLoading(false);
-          setTimeout(() => setApiResponse(null), 5000);
+          setTimeout(() => setApiResponse(null), 1000);
         })
         .catch(error => {
           console.error('Error fetching API:', error);
           setApiResponse({ status: "error", message: "Lỗi kết nối tới API." });
           setIsLoading(false);
-          setTimeout(() => setApiResponse(null), 5000);
+          setTimeout(() => setApiResponse(null), 1000);
         });
     }
   };
