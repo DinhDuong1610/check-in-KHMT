@@ -109,9 +109,9 @@ function App() {
             </div>
           )}
 
-          {scanResult && !apiResponse && !isLoading && (
+          {/* {scanResult && !apiResponse && !isLoading && (
             <p>Đã quét mã: {scanResult}</p>
-          )}
+          )} */}
         </div>
       </header>
     </div>
