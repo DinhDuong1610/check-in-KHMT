@@ -7,6 +7,9 @@ interface ApiResponse {
   message: string;
 }
 
+const SCANNING_STATE = "SCANNING";
+const PAUSED_STATE = "PAUSED";
+
 function App() {
   const [scanResult, setScanResult] = useState<string | null>(null);
   const [apiResponse, setApiResponse] = useState<ApiResponse | null>(null);
@@ -21,6 +24,14 @@ function App() {
       setIsLoading(true);
       setScanResult(decodedText);
 
+      try {
+        if (scannerRef.current && scannerRef.current.getState().toString() === SCANNING_STATE) {
+          scannerRef.current.pause();
+        }
+      } catch (e) {
+        console.warn("Lỗi khi tạm dừng máy quét:", e);
+      }
+
       fetch(`${GOOGLE_SCRIPT_API_URL}?id=${decodedText}`)
         .then(response => response.json())
         .then((data: ApiResponse) => {
@@ -31,8 +42,23 @@ function App() {
         .catch(error => {
           console.error('Error fetching API:', error);
           setApiResponse({ status: "error", message: "Lỗi kết nối tới API." });
-          setIsLoading(false);
-          setTimeout(() => setApiResponse(null), 1000);
+          // setIsLoading(false);
+          // setTimeout(() => setApiResponse(null), 1000);
+        })
+        .finally(() => {
+          setTimeout(() => {
+            setApiResponse(null);
+
+            try {
+              if (scannerRef.current && scannerRef.current.getState().toString() === PAUSED_STATE) {
+                scannerRef.current.resume();
+              }
+            } catch (e) {
+              console.warn("Lỗi khi chạy lại máy quét:", e);
+            }
+
+            setIsLoading(false);
+          }, 5000);
         });
     }
   };
