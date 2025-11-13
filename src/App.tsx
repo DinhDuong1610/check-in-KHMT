@@ -36,8 +36,8 @@ function App() {
         .then(response => response.json())
         .then((data: ApiResponse) => {
           setApiResponse(data);
-          // setIsLoading(false);
-          // setTimeout(() => setApiResponse(null), 1000);
+          setIsLoading(false);
+          setTimeout(() => setApiResponse(null), 5000);
         })
         .catch(error => {
           console.error('Error fetching API:', error);
@@ -46,19 +46,13 @@ function App() {
           setTimeout(() => setApiResponse(null), 1000);
         })
         .finally(() => {
-          setTimeout(() => {
-            setApiResponse(null);
-
-            try {
-              if (scannerRef.current && scannerRef.current.getState().toString() === PAUSED_STATE) {
-                scannerRef.current.resume();
-              }
-            } catch (e) {
-              console.warn("Lỗi khi chạy lại máy quét:", e);
+          try {
+            if (scannerRef.current && scannerRef.current.getState().toString() === PAUSED_STATE) {
+              scannerRef.current.resume();
             }
-
-            setIsLoading(false);
-          }, 5000);
+          } catch (e) {
+            console.warn("Lỗi khi chạy lại máy quét:", e);
+          }
         });
     }
   };
