@@ -36,14 +36,14 @@ function App() {
         .then(response => response.json())
         .then((data: ApiResponse) => {
           setApiResponse(data);
-          setIsLoading(false);
-          setTimeout(() => setApiResponse(null), 1000);
+          // setIsLoading(false);
+          // setTimeout(() => setApiResponse(null), 1000);
         })
         .catch(error => {
           console.error('Error fetching API:', error);
           setApiResponse({ status: "error", message: "Lỗi kết nối tới API." });
-          // setIsLoading(false);
-          // setTimeout(() => setApiResponse(null), 1000);
+          setIsLoading(false);
+          setTimeout(() => setApiResponse(null), 1000);
         })
         .finally(() => {
           setTimeout(() => {
